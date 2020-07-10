@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Tables from './Student'
+import Students from './Student'
 import {Modal, Button, Form} from 'react-bootstrap'
 
 
@@ -64,6 +64,7 @@ class Home extends React.Component{
       this.setState({
         newStudent:{
           name:"",
+          id:"",
           surname:"",
           email:"",
           date: "",
@@ -78,34 +79,17 @@ class Home extends React.Component{
     }
   }
 
-  editStudent = async (e)=>{
-    e.preventDefault()
-    let response = await fetch("http://localhost:3001/students" + this.state.newStudent.id, {
-      method:"PUT",
-      body:JSON.stringify(this.state.newStudent),
-      headers:{
-        "Content-Type":"application/json"
-      }
-    })
-    if (response.ok){
-      this.fetchOneStudent()
-      this.setState({
-        editStudent:false
-      })
-    }else{
-      alert ("something went wrong")
-    }
-    
-  }
+  
 
-  deleteStudent = async (id) => {
-    let response = await fetch("http://localhost:3001/students" + id,{
+  deleteStudent = async (_id) => {
+    let response = await fetch("http://localhost:3001/students" + _id,{
       method:"DELETE"
     })
     if(response.ok){
       let students= await response.json()
       this.setState({
-        students:this.state.students.filter(x =>x.id !== students.id)
+         students:this.state.students.filter(x =>x._id !== _id)
+        
       })
     }else{
       alert("student not deleted")
@@ -127,10 +111,11 @@ class Home extends React.Component{
   render(){
     return(
       <>
-      <Tables 
+      <Students 
       data = {this.state.students}
       fetchOneStudent={this.fetchOneStudent}
-      deleteStudent= {this.deleteStudent}
+      deleteStud = {this.deleteStudent}
+    
       />
       <Button onClick={() => this.setState({showModal:true})}> Add student</Button>
       
@@ -175,6 +160,13 @@ class Home extends React.Component{
     id = "Date"
     placeholder="Chose Date Of Birth"
     value = {this.state.newStudent.date}
+    onChange= {this.handleChange}
+    />
+    <Form.Control 
+    type="Date" 
+    id = "image"
+    placeholder="Chose Date Of Birth"
+    value = {this.state.newStudent.image}
     onChange= {this.handleChange}
     />
   <Button variant="primary" type="submit">

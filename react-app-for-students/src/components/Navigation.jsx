@@ -9,7 +9,7 @@ import{Link, withRouter} from "react-router-dom"
     }
 
     showSearchResult = async(searchQuery) => {
-        let response = await fetch ("http://localhost:3001/students?="  + searchQuery)
+        let response = await fetch ("http://localhost:3001/students?name=" + searchQuery)
         if(response.ok){
             let searchItem = await response.json()
             console.log(searchItem)
@@ -40,7 +40,15 @@ import{Link, withRouter} from "react-router-dom"
       <Link className = "nav-link" to="/Details">Details</Link>
     </Nav>
     <Form inline>
-      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+      <FormControl 
+      type="text"
+      placeholder="Search"
+      className="mr-sm-2" 
+      onKeyDown = {this.searchStringHandler}
+      onChange= {this.searchStringHandler}
+      value= {this.state.search}
+        
+        />
       <Button variant="outline-success" onClick = {this.showSearchResult}>Search</Button>
     </Form>
   </Navbar.Collapse>

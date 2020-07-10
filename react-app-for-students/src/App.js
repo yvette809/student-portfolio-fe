@@ -20,7 +20,7 @@ class App extends React.Component{
      <>
      <Navigation/>
      <Route path="/" exact><Home/></Route>
-     <Route path="/details/:_id" exact><Details/></Route>
+     <Route path="/details/:_id" ><Details/></Route>
      </>
      </Router>
    )
