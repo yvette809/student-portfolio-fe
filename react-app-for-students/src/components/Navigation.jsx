@@ -1,5 +1,6 @@
 import React from 'react'
 import {Navbar, Nav, FormControl, Button, Form} from 'react-bootstrap'
+import{Link, withRouter} from "react-router-dom"
 
  class Navigation extends React.Component {
 
@@ -35,8 +36,8 @@ import {Navbar, Nav, FormControl, Button, Form} from 'react-bootstrap'
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
-      <Nav.Link href="#home">Home</Nav.Link>
-      <Nav.Link href="#link">Details</Nav.Link>
+      <Link  className = "nav-link" to="/">Home</Link>
+      <Link className = "nav-link" to="/Details">Details</Link>
     </Nav>
     <Form inline>
       <FormControl type="text" placeholder="Search" className="mr-sm-2" />

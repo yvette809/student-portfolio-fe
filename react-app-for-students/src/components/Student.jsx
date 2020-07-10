@@ -1,5 +1,6 @@
 import React from 'react'
 import{Card,Row,Col ,Button, Container} from 'react-bootstrap'
+import{Link} from "react-router-dom"
 
 
 const Students = (props) => {
@@ -9,7 +10,7 @@ const Students = (props) => {
         {props.data.map (stud => 
         <Col lg ={3} md={4} xs={6}>
         <Card style={{ width: '18rem' }} id = {stud._id}>
-  <Card.Img variant="top" src={stud.image}  style = {{borderRadius:"100%"}}/>
+  <Link to="/details:_id"><Card.Img variant="top" src={stud.image}  style = {{borderRadius:"100%"}}/></Link>
   <Card.Body>
     <Card.Title>{stud.name}- {stud.surname}</Card.Title>
     <Card.Text>
@@ -20,14 +21,8 @@ const Students = (props) => {
   </Card.Body>
 </Card>
         </Col>
-        
-           
-            
+  
             )}
-        
-                        {/* <td><Button variant ="warning" onClick= {()=>props.fetchOneStudent(stud.id)}>Edit</Button></td>
-                        <td><Button variant ="danger" onClick = {()=>props.deleteStudent(stud.id)}>Delete</Button></td> */}
-
                  
          </Row>
         </Container>
